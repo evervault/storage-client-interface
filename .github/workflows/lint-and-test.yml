@@ -1,0 +1,22 @@
+on:
+  push:
+    paths:
+      - src/**
+      - .github/workflows/lint-and-test.yml
+name: Lint and Test
+jobs:
+  lint_and_test_rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install latest stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+          components: rustfmt, clippy
+      - uses: davidB/rust-cargo-make@10579dcff82285736fad5291533b52d3c93d6b3b
+      - name: Run CI Tasks with backtrace
+        run: cargo make ci
+        env:
+          RUST_BACKTRACE: full
