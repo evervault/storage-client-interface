@@ -1,0 +1,23 @@
+[env]
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+
+[tasks.lint]
+install_crate = "clippy"
+command = "cargo"
+args = ["clippy", "--", "-W", "clippy::pedantic"]
+
+[tasks.format]
+install_crate = "rustfmt"
+command = "cargo"
+args = ["fmt", "--check"]
+
+[tasks.check]
+command = "cargo"
+args = ["check"]
+
+[tasks.build]
+command = "cargo"
+args = ["build"]
+
+[tasks.ci]
+dependencies = ["lint","format","check","build"]
