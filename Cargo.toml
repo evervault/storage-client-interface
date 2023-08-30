@@ -2,8 +2,14 @@
 name = "storage-client-interface"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "Apache-2.0"
+description = "A Rust library for exposing the StorageClientInterface trait for interacting with a storage backend. Used by Evervault Cages."
+homepage = "https://github.com/evervault/storage-client-interface"
+documentation = "https://docs.rs/storage-client-interface"
+repository = "https://github.com/evervault/storage-client-interface"
+readme = "README.md"
+keywords = ["storage", "acme", "s3", "cages", "evervault"]
+categories = ["development-tools"]
 
 [dependencies]
 thiserror = "1.0.25"
