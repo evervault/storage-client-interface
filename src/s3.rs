@@ -67,6 +67,7 @@ impl StorageClientInterface for StorageClient {
             Err(err) => match err.into_service_error() {
                 GetObjectError::NoSuchKey(_) => return Ok(None),
                 err => {
+                    println!("Error getting object from S3: {:?}", err);
                     return Err(StorageClientError::GetObject(err.to_string()));
                 }
             },
@@ -96,7 +97,10 @@ impl StorageClientInterface for StorageClient {
             .body(ByteStream::from(body_bytes))
             .send()
             .await
-            .map_err(ClientError::PutObject)?;
+            .map_err(|err| {
+                println!("Error puttin object to S3: {:?}", err);
+                ClientError::PutObject(err)
+            })?;
 
         Ok(())
     }
@@ -109,7 +113,10 @@ impl StorageClientInterface for StorageClient {
             .key(key)
             .send()
             .await
-            .map_err(ClientError::DeleteObject)?;
+            .map_err(|err| {
+                println!("Error deleting object in S3: {:?}", err);
+                ClientError::DeleteObject(err)
+            })?;
 
         Ok(())
     }

@@ -1,6 +1,6 @@
 [package]
 name = "storage-client-interface"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 license = "Apache-2.0"
 description = "A Rust library for exposing the StorageClientInterface trait for interacting with a storage backend. Used by Evervault Cages."
